@@ -1,6 +1,6 @@
 ---
 name: tgw
-description: tgw CLI — TON blockchain from the terminal. Wallet info, transfers, jettons, NFTs, .ton DNS, prices, DEX swaps, and agent wallets. Package: @tongateway/cli
+description: "tgw CLI — TON blockchain from the terminal. Wallet info, transfers, jettons, NFTs, .ton DNS, prices, DEX swaps, and agent wallets. Package: @tongateway/cli"
 ---
 
 # tgw CLI
