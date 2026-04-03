@@ -5,7 +5,7 @@ import { homedir } from 'node:os';
 const TOKEN_FILE = join(homedir(), '.tongateway', 'token');
 
 export function loadToken(): string {
-  if (process.env.AGENT_GATEWAY_TOKEN) return process.env.AGENT_GATEWAY_TOKEN;
+  if (process.env.AGENT_GATEWAY_TOKEN !== undefined) return process.env.AGENT_GATEWAY_TOKEN;
   try {
     return readFileSync(TOKEN_FILE, 'utf-8').trim();
   } catch {

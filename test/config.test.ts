@@ -10,7 +10,7 @@ describe('config', () => {
     vi.resetModules();
     mkdirSync(join(TEST_HOME, '.tongateway'), { recursive: true });
     vi.stubEnv('HOME', TEST_HOME);
-    vi.stubEnv('AGENT_GATEWAY_TOKEN', '');
+    delete process.env['AGENT_GATEWAY_TOKEN'];
     vi.stubEnv('AGENT_GATEWAY_API_URL', '');
   });
 
@@ -40,7 +40,7 @@ describe('config', () => {
   it('saves token to file', async () => {
     const { saveToken, loadToken } = await import('../src/config.js');
     saveToken('saved-token-789');
-    vi.stubEnv('AGENT_GATEWAY_TOKEN', '');
+    delete process.env['AGENT_GATEWAY_TOKEN'];
     expect(loadToken()).toBe('saved-token-789');
   });
 
