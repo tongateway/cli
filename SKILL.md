@@ -13,10 +13,14 @@ description: tgw CLI — TON blockchain from the terminal. Wallet info, transfer
 
 ```bash
 tgw auth
-# → prints link to https://tongateway.ai/token
+# → generates a connect link: https://tongateway.ai/connect?authId=...
+# → open the link, connect your wallet
+
+tgw auth:complete <authId>
+# → completes auth, saves token, prints wallet address
 
 tgw auth <token>
-# → saves token, prints wallet address
+# → saves token directly (if you already have one)
 ```
 
 Token is stored in `~/.tongateway/token`. You can also set `AGENT_GATEWAY_TOKEN` env var.

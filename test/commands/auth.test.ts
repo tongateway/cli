@@ -24,12 +24,17 @@ describe('auth command', () => {
     rmSync(TEST_HOME, { recursive: true, force: true });
   });
 
-  it('prints token link when no token argument', async () => {
+  it('prints connect link when no token argument', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ authId: 'abc-123', authUrl: 'https://tongateway.ai/connect?authId=abc-123' }),
+    }));
+
     const { runAuth } = await import('../../src/commands/auth.js');
     await runAuth(undefined, { json: false });
     const output = stdoutWrite.mock.calls.map((c: any) => c[0]).join('');
-    expect(output).toContain('tongateway.ai');
-    expect(output).toContain('tgw auth <token>');
+    expect(output).toContain('tongateway.ai/connect');
+    expect(output).toContain('auth:complete');
   });
 
   it('saves token and prints wallet address on success', async () => {

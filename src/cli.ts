@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { runAuth } from './commands/auth.js';
+import { runAuth, runAuthComplete } from './commands/auth.js';
 import { runWalletInfo, runWalletJettons, runWalletTransactions, runWalletNfts } from './commands/wallet.js';
 import { runTransferSend, runTransferStatus, runTransferPending, runTransferBatch } from './commands/transfer.js';
 import { runLookupResolve, runLookupPrice } from './commands/lookup.js';
@@ -13,16 +13,23 @@ const program = new Command();
 program
   .name('tgw')
   .description('TON blockchain CLI — wallet, transfers, DEX, agent wallets')
-  .version('0.1.0')
+  .version('0.1.1')
   .option('--json', 'Output raw JSON', false);
 
 // --- Auth ---
 
 program
   .command('auth [token]')
-  .description('Authenticate with TON gateway')
+  .description('Authenticate — run with no args to get a connect link, or pass a token directly')
   .action(async (token: string | undefined) => {
     await runAuth(token, { json: program.opts().json });
+  });
+
+program
+  .command('auth:complete <authId>')
+  .description('Complete authentication after connecting wallet')
+  .action(async (authId: string) => {
+    await runAuthComplete(authId, { json: program.opts().json });
   });
 
 // --- Wallet ---
