@@ -1,0 +1,27 @@
+{
+  "name": "@tongateway/cli",
+  "version": "0.1.0",
+  "description": "TON blockchain CLI for wallet management, transfers, DEX, and agent wallets",
+  "homepage": "https://tongateway.ai",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "tgw": "./dist/cli.js"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.17.2",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vitest": "^4.1.1"
+  }
+}
