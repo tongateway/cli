@@ -88,11 +88,12 @@ const dex = program.command('dex').description('DEX trading — pairs and swap o
 dex.command('pairs').description('List available trading pairs')
   .action(async () => { await runDexPairs({ json: program.opts().json }); });
 
-dex.command('swap').description('Place a DEX swap order')
-  .requiredOption('--from <symbol>', 'Token to sell')
-  .requiredOption('--to <symbol>', 'Token to buy')
-  .requiredOption('--amount <amount>', 'Amount to sell')
-  .requiredOption('--price <price>', 'Price per fromToken in toToken')
+dex.command('swap').description('Place a DEX swap order (single or batch via --file)')
+  .option('--from <symbol>', 'Token to sell')
+  .option('--to <symbol>', 'Token to buy')
+  .option('--amount <amount>', 'Amount to sell')
+  .option('--price <price>', 'Price per fromToken in toToken')
+  .option('--file <path>', 'JSON file with orders array for batch')
   .action(async (cmdOpts) => { await runDexSwap({ ...cmdOpts, json: program.opts().json }); });
 
 // --- Agent Wallet ---
