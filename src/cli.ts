@@ -13,7 +13,7 @@ const program = new Command();
 program
   .name('tgw')
   .description('TON blockchain CLI — wallet, transfers, DEX, agent wallets')
-  .version('0.2.0')
+  .version('0.2.1')
   .option('--json', 'Output raw JSON', false);
 
 // --- Auth ---

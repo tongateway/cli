@@ -60,11 +60,21 @@ tgw lookup price --currency EUR  # TON price in EUR
 
 ```bash
 tgw dex pairs                                                           # List tokens
-tgw dex swap --from NOT --to TON --amount 10000 --price 0.000289        # Place order
+tgw dex swap --from NOT --to TON --amount 10000 --price 0.000289        # Single order
 tgw dex swap --from USDT --to AGNT --amount 5 --price 20               # 1 USDT = 20 AGNT
+tgw dex swap --file orders.json                                         # Batch (sequential)
 ```
 
 Supported tokens: TON, NOT, USDT, DOGS, BUILD, AGNT, CBBTC, PX, XAUT0
+
+**Batch orders (`--file`):** Orders are sent one at a time with a 5s pause between each. TonConnect can only handle one transaction at a time — the user must approve each order separately in their wallet app before the next one is sent. The orders.json format:
+
+```json
+[
+  {"fromToken": "NOT", "toToken": "TON", "amount": "10000", "price": 0.000289},
+  {"fromToken": "USDT", "toToken": "AGNT", "amount": "5", "price": 20}
+]
+```
 
 ### Agent Wallet
 
@@ -129,8 +139,9 @@ tgw transfer send --to alice.ton --amount 0.5
 ## Important
 
 - All amounts are human-readable (e.g. `1.5` for 1.5 TON, not nanoTON)
-- Transfers require wallet approval in your TON wallet app
-- Agent wallet transfers execute immediately without approval
+- Transfers require wallet approval in your TON wallet app — one at a time
+- TonConnect only supports one pending transaction at a time. Do NOT send multiple transfers or orders simultaneously — wait for the user to approve each one before sending the next
+- Agent wallet transfers execute immediately without approval (no TonConnect limitation)
 - Token persists in `~/.tongateway/token` across sessions
 - `--json` flag works on every command for scripting/AI use
 
