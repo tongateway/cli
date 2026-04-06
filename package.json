@@ -1,6 +1,6 @@
 {
   "name": "@tongateway/cli",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "TON blockchain CLI for wallet management, transfers, DEX, and agent wallets",
   "homepage": "https://tongateway.ai",
   "license": "MIT",
