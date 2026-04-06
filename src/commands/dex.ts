@@ -36,7 +36,7 @@ function printSwapResult(result: any, opts: { json: boolean }): void {
 
 export async function runDexSwap(opts: { from?: string; to?: string; amount?: string; price?: string; slippage?: string; file?: string; json: boolean }): Promise<void> {
   try {
-    const slippage = opts.slippage ? parseFloat(opts.slippage) : undefined;
+    const slippage = opts.slippage ? parseFloat(opts.slippage) : 1;
 
     if (opts.file) {
       const raw = readFileSync(opts.file, 'utf-8');
@@ -79,7 +79,7 @@ export async function runDexSwap(opts: { from?: string; to?: string; amount?: st
         { key: 'amount', header: 'Amount' },
         { key: 'price', header: 'Price' },
       ]);
-      process.stdout.write(`\nSlippage: ${orderList[0]?.slippage ?? slippage ?? 4}%\nRequest ID: ${result.id}\n`);
+      process.stdout.write(`\nSlippage: ${orderList[0]?.slippage ?? slippage}%\nRequest ID: ${result.id}\n`);
       process.stdout.write('\nApprove in your wallet app — one signature for all orders.\n');
     } else if (opts.from && opts.to && opts.amount && opts.price) {
       const body: Record<string, any> = {

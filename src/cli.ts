@@ -93,7 +93,7 @@ dex.command('swap').description('Place a DEX swap order (single or batch via --f
   .option('--to <symbol>', 'Token to buy')
   .option('--amount <amount>', 'Amount to sell')
   .option('--price <price>', 'Price per fromToken in toToken')
-  .option('--slippage <percent>', 'Slippage tolerance in % (default: 4, includes fees)')
+  .option('--slippage <percent>', 'Slippage tolerance in % (default: 1)')
   .option('--file <path>', 'JSON file with orders array for batch')
   .action(async (cmdOpts) => { await runDexSwap({ ...cmdOpts, json: program.opts().json }); });
 
